@@ -1,0 +1,98 @@
+img{
+    max-width: 100%;
+}
+
+.title{
+    text-align: center;
+    padding: 100px;
+}
+
+.header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+}
+
+h1{
+    margin: 0;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+}
+
+li{
+    padding: 40px;
+}
+
+li a{
+    color: black;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px){
+    h1{
+        padding: 16px 0;
+    }
+    .header_menu{
+        width: 100%;
+    }
+    ul{
+        padding: 0;
+    }
+    li{
+        width: 50%;
+        border: 1px solid #d8d8d8;
+    }
+}
+
+.about__area{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about__area-img{
+    width: 40%;
+}
+
+.about__area-description{
+    width: 50%;
+    padding: 20px;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 768px) {
+    .about__area-img {
+        width: 100%;
+    }
+    .about__area-description {
+        width: 100%;
+    }
+}
+
+.Research__Field-description-text{
+    padding: 40px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.Experience-description-text{
+    padding: 40px;
+    font-size: 25px;
+}
+
+.Project-description-text{
+    padding: 40px;
+    font-size: 25px;
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+}
