@@ -57,21 +57,7 @@ li a{
     font-size: 20px;
 }
 
-@media screen and (max-width: 768px){
-    h1{
-        padding: 16px 0;
-    }
-    .header_menu{
-        width: 100%;
-    }
-    ul{
-        padding: 0;
-    }
-    li{
-        width: 50%;
-        border: 1px solid #d8d8d8;
-    }
-}
+
 
 .about__area{
     display: flex;
@@ -79,23 +65,17 @@ li a{
 }
 
 .about__area-img{
-    width: 40%;
+    width: 35%;
+    margin:auto;
 }
 
 .about__area-description{
-    width: 50%;
+    width: 60%;
     padding: 20px;
     font-size: 25px;
 }
 
-@media screen and (max-width: 768px) {
-    .about__area-img {
-        width: 100%;
-    }
-    .about__area-description {
-        width: 100%;
-    }
-}
+
 
 .Research__Field-description-text{
     padding: 40px;
@@ -133,7 +113,6 @@ li a{
 .Project__area-description-text{
     padding: 20px;
     font-size: 25px;
-    float: right;
 }
 
 .Contribution-description-text{
