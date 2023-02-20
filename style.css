@@ -4,6 +4,8 @@ head{
 
 body {
     font-family: 'Times New Roman', serif;
+    background-color: aliceblue;
+
 }
 
 img{
@@ -12,7 +14,8 @@ img{
 
 .title{
     text-align: center;
-    padding: 100px;
+    padding: 80px;
+
 }
 
 .header{
@@ -22,16 +25,19 @@ img{
     align-items: center;
     padding: 16px 0;
     font-family: 'Times New Roman', serif;
+    background-color: aliceblue;
+
 
 }
 
 h1{
-    margin: 0;
+    margin: 10px;
     font-weight: bold;
     font-family: 'Meiryo', serif;
 }
 
 h2{
+    margin: 10px;
     font-weight: bold;
     text-decoration:underline;
     font-family: 'Script', serif;
@@ -57,17 +63,31 @@ li a{
     font-size: 20px;
 }
 
-
+.container{
+}
 
 .about__area{
     display: flex;
     flex-wrap: wrap;
+    padding: 40px;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
 }
 
 .about__area-img{
-    width: 35%;
-    margin:auto;
+    margin-top: 60px;
+    width: 40%;
+    text-align: center;
+
 }
+
+.about__area-img-text{
+    margin-top: 20px;
+    font-size: 35px;
+
+}
+
 
 .about__area-description{
     width: 60%;
@@ -75,34 +95,45 @@ li a{
     font-size: 25px;
 }
 
-
-
-.Research__Field-description-text{
-    padding: 40px;
+.Research__Field-description, .Keyword-description{
+    padding: 50px;
     font-size: 25px;
     text-align: center;
+    float: left;
+    width: 50%;
+}
+.Research__Field-description-text {
+    padding: 53px;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
 }
 
-.Keyword-description-text{
-    padding: 40px;
-    font-size: 25px;
-    text-align: center;
+.Keyword-description-text {
+    padding: 35px;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
+    margin-bottom: 100px;
 }
 
-.Skill-description-text{
-    padding: 40px;
-    font-size: 25px;
-    text-align: center;
+.Experience{
 }
-
 .Experience-description-text{
     padding: 40px;
     font-size: 25px;
     text-align: left;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
 }
 .Project__area{
+    padding: 50px;
     display: flex;
     flex-wrap: wrap;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
 }
 
 .Project__area-img{
@@ -115,12 +146,22 @@ li a{
     font-size: 25px;
 }
 
+.Contribution{
+    margin-bottom: 100px;
+
+}
+
 .Contribution-description-text{
     padding: 40px;
     font-size: 25px;
     text-align: left;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    background: white;
 }
 
 footer{
+    margin-top: 100px;
     text-align: center;
+    background-color: aliceblue;
 }
