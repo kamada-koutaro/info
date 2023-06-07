@@ -26,8 +26,6 @@ img{
     padding: 16px 0;
     font-family: 'Times New Roman', serif;
     background-color: aliceblue;
-
-
 }
 
 h1{
@@ -78,22 +76,15 @@ li a{
 
 .about__area-img{
     margin-top: 60px;
-    width: 40%;
-    text-align: center;
+    width: 90%;
+
 
 }
-
-.about__area-img-text{
-    margin-top: 20px;
-    font-size: 35px;
-
-}
-
 
 .about__area-description{
-    width: 60%;
     padding: 20px;
     font-size: 25px;
+
 }
 
 
