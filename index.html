@@ -4,212 +4,499 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Koutaro Kamada</title>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* smooth scrolling for anchor links */
-    html {
-      scroll-behavior: smooth;
+
+  <!-- Optional: modern font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    // Tailwind config (CDN)
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          boxShadow: {
+            soft: "0 10px 30px rgba(0,0,0,0.08)",
+          }
+        }
+      }
     }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50">
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur shadow">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#top" class="text-xl font-bold">Koutaro Kamada</a>
-      <ul class="hidden md:flex space-x-6 text-sm font-medium">
-        <li><a href="#about" class="hover:text-indigo-600">About me</a></li>
-        <li><a href="#project" class="hover:text-indigo-600">Project</a></li>
-        <li><a href="#publication" class="hover:text-indigo-600">Publication</a></li>
-        <li><a href="#experience" class="hover:text-indigo-600">Experience</a></li>
-        <li><a href="#contribution" class="hover:text-indigo-600">Contribution</a></li>
 
+<body class="font-sans antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+  <!-- Background accents -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-24 left-1/2 h-72 w-[48rem] -translate-x-1/2 rounded-full bg-indigo-200/50 blur-3xl dark:bg-indigo-500/15"></div>
+    <div class="absolute top-[28rem] right-[-10rem] h-72 w-72 rounded-full bg-sky-200/40 blur-3xl dark:bg-sky-500/10"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200/70 bg-white/70 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/50">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="#top" class="group inline-flex items-center gap-2">
+        <span class="text-base sm:text-lg font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Koutaro Kamada
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-700 dark:text-zinc-200">
+        <li><a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400">About</a></li>
+        <li><a href="#project" class="hover:text-indigo-600 dark:hover:text-indigo-400">Project</a></li>
+        <li><a href="#publication" class="hover:text-indigo-600 dark:hover:text-indigo-400">Publication</a></li>
+        <li><a href="#funding" class="hover:text-indigo-600 dark:hover:text-indigo-400">Funding</a></li>
+        <li><a href="#experience" class="hover:text-indigo-600 dark:hover:text-indigo-400">Experience</a></li>
+        <li><a href="#contribution" class="hover:text-indigo-600 dark:hover:text-indigo-400">Contribution</a></li>
       </ul>
-      <!-- mobile menu button -->
-      <button id="menuBtn" class="md:hidden focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+
+      <div class="flex items-center gap-2">
+        <!-- Dark mode toggle -->
+        <button id="themeBtn"
+          class="hidden sm:inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-700 shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          type="button" aria-label="Toggle theme">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+          <span class="hidden lg:inline">Theme</span>
+        </button>
+
+        <!-- Mobile menu button -->
+        <button id="menuBtn"
+          class="md:hidden inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white p-2 shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+          type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <!-- mobile menu -->
-    <ul id="mobileMenu" class="md:hidden hidden flex-col space-y-2 pb-4 px-4 text-sm font-medium bg-white/90">
-      <li><a href="#about" class="block py-1">About me</a></li>
-      <li><a href="#project" class="block py-1">Project</a></li>
-      <li><a href="#publication" class="block py-1">Publication</a></li>
-      <li><a href="#experience" class="block py-1">Experience</a></li>
-      <li><a href="#contribution" class="block py-1">Contribution</a></li>
-    </ul>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/60">
+      <div class="mx-auto max-w-6xl px-4 py-3">
+        <ul class="flex flex-col gap-1 text-sm font-semibold">
+          <li><a href="#about" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">About</a></li>
+          <li><a href="#project" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">Project</a></li>
+          <li><a href="#publication" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">Publication</a></li>
+          <li><a href="#funding" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">Funding</a></li>
+          <li><a href="#experience" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">Experience</a></li>
+          <li><a href="#contribution" class="block rounded-lg px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-900">Contribution</a></li>
+        </ul>
+        <button id="themeBtnMobile"
+          class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm font-semibold text-zinc-700 shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          type="button" aria-label="Toggle theme (mobile)">
+          <span id="themeIconMobile" aria-hidden="true">☾</span>
+          <span>Toggle Theme</span>
+        </button>
+      </div>
+    </div>
   </nav>
 
-  <!-- Hero / Top anchor -->
-  <header id="top" class="pt-32 pb-20 bg-gradient-to-b from-indigo-50 to-transparent">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-6">Koutaro Kamada</h1>
-      <p class="text-lg md:text-xl font-medium">Ph.D student (2024.4-) / SPRING Researcher (2024.4-)</p>
-      <p class="text-lg md:text-xl mt-2">I am looking for a short-term internship (1~2weeks). Even just visiting would be fine. Please contact me (2025.4).</p>
-      <div class="mt-6 flex justify-center space-x-6">
-        <a href="https://researchmap.jp/koutaro_kamada" class="underline hover:text-indigo-700">Research map</a>
-        <a href="https://scholar.google.com/citations?user=3ulYi1UAAAAJ&hl" class="underline hover:text-indigo-700">Google Scholar</a>
-        <a href="https://orcid.org/0000-0002-7585-150X" class="underline hover:text-indigo-700">Orcid</a>
-        <a href="pdf/CV.pdf" class="underline hover:text-indigo-700">CV</a>
+  <!-- Hero -->
+  <header id="top" class="pt-28 sm:pt-32 pb-12 sm:pb-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="rounded-3xl border border-zinc-200/70 bg-white/60 p-6 sm:p-10 shadow-soft backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/40">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
+          </p>
+
+          <!-- kamada を青にしない（黒/白） -->
+          <h1 class="mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+            Koutaro Kamada
+          </h1>
+
+          <p class="mt-4 text-base sm:text-lg font-medium text-zinc-700 dark:text-zinc-300">
+            Ph.D student (2024.4-) / DC2, JSPS Research Fellowship (2026.4-) （selected）
+          </p>
+
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <a href="https://researchmap.jp/koutaro_kamada"
+               class="inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+              Researchmap
+            </a>
+            <a href="https://scholar.google.com/citations?user=3ulYi1UAAAAJ&hl"
+               class="inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+              Google Scholar
+            </a>
+            <a href="https://orcid.org/0000-0002-7585-150X"
+               class="inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold shadow-sm hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800">
+              ORCID
+            </a>
+            <a href="pdf/CV.pdf"
+               class="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700">
+              CV (PDF)
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- About Section -->
-  <section id="about" class="max-w-4xl mx-auto px-4 py-16" aria-label="About me">
-    <h2 class="text-3xl font-bold mb-6">About me</h2>
-    <div class="space-y-8">
-      <div>
-        <h3 class="font-semibold mb-2">■Affiliation</h3>
-        <p><a href="https://www.jaist.ac.jp/ks/labs/yuizono/" class="underline hover:text-indigo-700">Yuizono Laboratory</a>, Japan Advanced Institute of Science and Technology (JAIST).</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-2">■Education</h3>
-        <ul class="list-disc list-inside space-y-1">
-          <li>2018.4. - 2022.3. // Bachelor of Economics, Takasaki City University of Economics.</li>
-          <li>2022.4. - 2024.3 // Master of Philosophy, Division of Transdisciplinary Sciences, Graduate School of Advanced Science and Technology, Japan Advanced Institute of Science and Technology. Kanazawa University. [Outstanding students]</li>
-          <li>2024.4. - // Ph.D student, Division of Transdisciplinary Sciences, Graduate School of Advanced Science and Technology, Japan Advanced Institute of Science and Technology. Kanazawa University.</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-2">■Field of research</h3>
-        <p>CSCW (Computer-Supported Cooperative Work), HCI (Human-Computer Interaction), Decision Sciences.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-2">■Keyword</h3>
-        <p>Remote Collaboration, Human-AI Collaboration, Decision-Making, Virtual Reality.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-2">■Award</h3>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Telecommunications Advancement Foundation Award 2023 - Telecom Interdisciplinary Research Student Award.</li>
-          <li>Awarding of Outstanding Students (MPhil) in JAIST (2024.3).</li>
-          <li>DICOMO2023 Outstanding Paper Award.</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-2">■Contact</h3>
-        <p>Mail: kamada [at] jaist.ac.jp // kamada [at] stu.kanazawa-u.ac.jp</p>
-      </div>
-    </div>
-  </section>
+  <!-- Main content -->
+  <main class="pb-10">
+    <!-- About -->
+    <section id="about" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">About</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
 
-  <!-- Project Section -->
-  <section id="project" class="max-w-4xl mx-auto px-4 py-16" aria-label="Project">
-    <h2 class="text-3xl font-bold mb-6">Project</h2>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <!-- Left column -->
+          <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Affiliation</h3>
+            <p class="mt-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              <a href="https://www.jaist.ac.jp/ks/labs/yuizono/" class="font-semibold text-indigo-700 hover:underline dark:text-indigo-300">
+                Yuizono Laboratory
+              </a>,
+              Japan Advanced Institute of Science and Technology (JAIST).
+            </p>
 
-      <div>
-        <h3 class="font-semibold">■ Group Discussion (2022-):</h3>
-        <p class="mt-2">We study how to make group discussions―face-to-face, text, video, and VR—work better for everyone. Our focus is group dynamics (e.g., social loafing, the tendency for individual effort to drop in groups).
-          Through experiments and data analysis, we identify why this happens and how humans perceive this. Based on our findings, we provide design practical computer-mediated communication (CMC) tools that counter it. </p>
-        <p class="mt-2 font-medium">Keywords: Remote Collaboration, Computer-Mediated Communication (CMC), Group Dynamics, Social Loafing</p>
+            <div class="mt-6">
+              <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Field of research</h3>
+              <p class="mt-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                CSCW, HCI, Decision Sciences.
+              </p>
+            </div>
+
+            <div class="mt-6">
+              <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Keywords</h3>
+              <p class="mt-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                Remote Collaboration, Human-AI Collaboration, Decision-Making, Virtual Reality.
+              </p>
+            </div>
+
+            <div class="mt-6">
+              <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Contact</h3>
+              <p class="mt-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                kamada [at] jaist.ac.jp <span class="text-zinc-400">/</span> kamada [at] stu.kanazawa-u.ac.jp
+              </p>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div class="space-y-6">
+            <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+              <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Education</h3>
+              <ul class="mt-3 space-y-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+                <li class="rounded-xl bg-zinc-50/70 p-3 dark:bg-zinc-900/40">
+                  <span class="font-semibold">2018.4 - 2022.3</span> — Bachelor of Economics, Takasaki City University of Economics.
+                </li>
+                <li class="rounded-xl bg-zinc-50/70 p-3 dark:bg-zinc-900/40">
+                  <span class="font-semibold">2022.4 - 2024.3</span> — Master of Philosophy, Division of Transdisciplinary Sciences,
+                  Graduate School of Advanced Science and Technology, JAIST / Kanazawa University.
+                  <span class="font-semibold text-indigo-700 dark:text-indigo-300">[Outstanding students]</span>
+                </li>
+                <li class="rounded-xl bg-zinc-50/70 p-3 dark:bg-zinc-900/40">
+                  <span class="font-semibold">2024.4 -</span> — Ph.D student, Division of Transdisciplinary Sciences,
+                  Graduate School of Advanced Science and Technology, JAIST / Kanazawa University.
+                </li>
+              </ul>
+            </div>
+
+            <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+              <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Awards</h3>
+              <ul class="mt-3 list-disc pl-5 space-y-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+                <li>Telecommunications Advancement Foundation Award 2023 — Telecom Interdisciplinary Research Student Award.</li>
+                <li>Awarding of Outstanding Students (MPhil) in JAIST (2024.3).</li>
+                <li>DICOMO2023 Outstanding Paper Award.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="border-t pt-6">
-        <h3 class="font-semibold">■ Human-AI Collaborative Decision-Making (2023-):</h3>
-        <p class="mt-2"> AI tools can improve our decisions, but over-reliance on AI can also reduce decision quality.
-This project studies and builds human-AI interfaces that help people use AI well.
-          For example, what kind of interfaces and their elements can foster appropriate trust in AI. The goal is simple: help people and AI make better decisions together.</p>
-        <p class="mt-2 font-medium">Keywords: Human-AI Collaboration, AI-Based Decision-Making</p>
+    <!-- Project -->
+    <section id="project" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Project</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+
+        <div class="mt-8 grid gap-6 lg:grid-cols-3">
+          <article class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-base font-extrabold">Group Discussion <span class="text-zinc-500 dark:text-zinc-400">(2022-)</span></h3>
+            <p class="mt-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              We study how to make group discussions—face-to-face, text, video, and VR—work better for everyone.
+              Our focus is group dynamics (e.g., social loafing). Through experiments and data analysis, we identify why this happens
+              and provide practical CMC tool designs that counter it.
+            </p>
+            <p class="mt-4 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+              Keywords: Remote Collaboration, CMC, Group Dynamics, Social Loafing
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-base font-extrabold">Human-AI Collaborative Decision-Making <span class="text-zinc-500 dark:text-zinc-400">(2023-)</span></h3>
+            <p class="mt-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              AI tools can improve decisions, but over-reliance can reduce decision quality.
+              We study and build human-AI interfaces that foster appropriate trust and help people use AI well.
+              The goal: help people and AI make better decisions together.
+            </p>
+            <p class="mt-4 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+              Keywords: Human-AI Collaboration, AI-Based Decision-Making
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-base font-extrabold">VR System for Psychiatric Disorders <span class="text-zinc-500 dark:text-zinc-400">(2023-)</span></h3>
+            <p class="mt-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              We are developing a VR system for mental disorders. For example, we aim to measure social cognitive functions
+              related to schizophrenia in a more realistic way using VR.
+            </p>
+            <p class="mt-4 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+              Keywords: VR, Social Cognition, Psychiatric Disorder
+            </p>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="border-t pt-6">
-        <h3 class="font-semibold">■ VR System for Psychiatric Disorders (2023-):</h3>
-        <p class="mt-2">We are developing a VR system for mental disorders. For example, we are aiming to measure social cognitive functions, which are strongly related to schizophrenia, in a way that is more realistic by using VR.</p>
-        <p class="mt-2 font-medium">Keywords: VR, Social Cognition, Psychiatric Disorder</p>
+    <!-- Publication -->
+    <section id="publication" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Publication</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+
+        <div class="mt-8 space-y-6">
+          <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">International Paper</h3>
+            <ul class="mt-4 space-y-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+              <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+                Koutaro Kamada, Nicharee Manakitrungrueng, Takaya Yuizono. (2025)
+                <span class="font-semibold">Simply Incorporating Generative AI into Groups Is Not Enough: Exploring the Effects of Human-AI Collaboration in Groups on Brainstorming</span>.
+                IEICE Transactions on Information and Systems E109-D(No.5)
+                <a href="https://globals.ieice.org/en_transactions/information/10.1587/transinf.2025DKP0002/_advpub_f"
+                   class="ml-2 font-semibold text-indigo-700 hover:underline dark:text-indigo-300">URL</a>
+              </li>
+
+              <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+                Koutaro Kamada, Satoi Shinoda, Mie Matsui, Takaya Yuizono. (2025)
+                The 20th International Conference on Knowledge, Information and Creativity Support Systems, Extended Abstracts.
+              </li>
+
+              <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+                Koutaro Kamada, Masami Takahashi, Naomi Yamashita. (2025)
+                <span class="font-semibold">Exploring Mismatches in Self-Others’ Perceptions of Effort in Videoconferencing</span>,
+                Extended Abstracts of the 2025 CHI Conference on Human Factors in Computing Systems, Article No. 247, pp. 1-7. (Peer-reviewed)
+                <a href="pdf/kamada_CHIEA2025_aam.pdf" class="ml-2 font-semibold text-indigo-700 hover:underline dark:text-indigo-300" download>PDF</a>
+              </li>
+
+              <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+                Koutaro Kamada, Haruomi Takahashi, Tzu-Yang Wang, Takaya Yuizono. (2025)
+                <span class="font-semibold">Exploring the Effect of User Trust in Generative AI on Decision-Making in Semi-Structured Problem</span>.
+                HCI International 2025 (LNCS vol 15771), pp. 237-253, Springer. (Oral, Peer-reviewed, Full paper)
+                <a href="pdf/kamada_HCII2025_aam.pdf" class="ml-2 font-semibold text-indigo-700 hover:underline dark:text-indigo-300" download>PDF</a>
+              </li>
+
+              <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+                Koutaro Kamada, Ryuya Watarai, Tzu-Yang Wang, Kentaro Takashima, Yasuyuki Sumi, Takaya Yuizono. (2023)
+                <span class="font-semibold">Explorative study of perceived social loafing in VR group discussion: A comparison between the poster presentation environment and the typical conference environment</span>,
+                INTERACT 2023 (LNCS vol 14144), pp. 115-134, Springer (Aug. 2023). (Oral, Peer-reviewed, Full paper)
+                <a href="pdf/kamada_INTERACT2023_aam.pdf" class="ml-2 font-semibold text-indigo-700 hover:underline dark:text-indigo-300" download>PDF</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Domestic Paper (Japanese)</h3>
+            <ul class="mt-4 list-disc pl-5 space-y-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+              <li>渡会隆哉, 鎌田光太郎, 角康之, 王子洋, 高島健太郎, 由井薗隆也. (2025) “VR会議における他者との対面量に着目した会議の質の分析”, 情報処理学会論文誌CDS, 15(1), 1-10.</li>
+              <li>鎌田光太郎, 渡会隆哉, 王子洋, 高島健太郎, 角康之, 由井薗隆也. (2023) “VRグループ・ディスカッションにおける会議形態の違いがターンテイキングに与える影響”, 第200回HIS研究会, 25(3), pp.97–102.</li>
+              <li>渡会隆哉, 鎌田光太郎, 王子洋, 高島健太郎, 角康之, 由井薗隆也. (2023) “VR会議における他者との対面量に着目した会議の質評価の試み”, DICOMO 2023.（優秀論文賞, 山下記念賞）</li>
+              <li>羅海洋, 由井薗隆也, 鎌田光太郎, 王子洋. (2023) “感情変化に注目した機械学習による冒険ストーリー生成の試行”, DICOMO 2023.</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+            <h3 class="text-sm font-extrabold tracking-wide text-zinc-900 dark:text-zinc-100">Poster / Demo</h3>
+            <ul class="mt-4 list-disc pl-5 space-y-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+              <li>由井薗隆也, 鎌田光太郎, 東方沙由理, 元山琴菜, 島田淳一, 白肌邦生, 小泉周, 永井由佳里. (2025) 21世紀型トランスファラブルスキルを持つ創造的問題解決人材の存在次元についての考察. 第47回日本創造学会研究大会.</li>
+              <li>劉牧辰, 松井三枝, 堂本千晶, 由井薗隆也, 鎌田光太郎. (2025) “メタバース・スーパーマーケット場面を利用した日常生活認知機能の測定法”, 認知神経科学会第30回学術集会.</li>
+              <li>鎌田光太郎, 篠田怜, 松井三枝, 由井薗隆也. (2025) “VRを利用した社会認知機能の測定手法の試作”, インタラクション2025.</li>
+              <li>劉牧辰, 松井三枝, 堂本千晶, 滝口雄太, 由井薗隆也, 鎌田光太郎. (2024) “メタバースによるショッピング課題の作成と実用可能性の検討”, 「生涯学」領域会議.</li>
+              <li>渡会隆哉, 鎌田光太郎, 角康之, 王子洋, 由井薗隆也, 高島健太郎. (2024) “VR会議における他者との対面量と言語行動の対応関係の分析”, インタラクション2024.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Publication Section -->
-  <section id="publication" class="max-w-4xl mx-auto px-4 py-16" aria-label="Publication">
-    <h2 class="text-3xl font-bold mb-6">Publication</h2>
-    <div class="space-y-10">
-      <div>
-        <h3 class="font-semibold mb-2">■ International Paper</h3>
-        <ul class="list-disc list-inside space-y-1">
-          <li>Koutaro Kamada, Nicharee Manakitrungrueng, Takaya Yuizono. (2025) Simply Incorporating Generative AI into Groups Is Not Enough: Exploring the Effects of Human-AI Collaboration in Groups on Brainstorming
-          IEICE Transactions on Information and Systems E109-D(No.5) <a href="https://globals.ieice.org/en_transactions/information/10.1587/transinf.2025DKP0002/_advpub_f" class="underline hover:text-indigo-700">URL</a> </li>
-          <li>Koutaro Kamada, Satoi Shinoda, Mie Matsui, Takaya Yuizono. (2025) The 20th International Conference on Knowledge, Information and Creativity Support Systems, Extended abstracts. </li>
-          <li>Koutaro Kamada, Masami Takahashi, Naomi Yamashita. (2025) "Exploring Mismatches in Self‑Others’ Perceptions of Effort in Videoconferencing", Extended Abstracts of the 2025 CHI Conference on Human Factors in Computing Systemsrticle No.: 247, pp. 1-7. (Peer‑reviewed)
-          <a href="pdf/kamada_CHIEA2025_aam.pdf" class="underline hover:text-indigo-700" download>PDF</a></li></li>
-          <li>Koutaro Kamada, Haruomi Takahashi, Tzu‑Yang Wang, Takaya Yuizono. (2025) "Exploring the Effect of User Trust in Generative AI on Decision‑Making in Semi‑Structured Problem." International Conference on Human‑Computer Interaction (HCI International 2025) LNCS, vol 15771, pp. 237‑253, Springer. (Oral, Peer‑reviewed, Full paper)
-          <a href="pdf/kamada_HCII2025_aam.pdf" class="underline hover:text-indigo-700" download>PDF</a></li>
-          <li>Koutaro Kamada, Ryuya Watarai, Tzu‑Yang Wang, Kentaro Takashima, Yasuyuki Sumi, Takaya Yuizono. (2023) “Explorative study of perceived social loafing in VR group discussion: A comparison between the poster presentation environment and the typical conference environment”, IFIP TC.13 International Conference on Human‑Computer Interaction (INTERACT), LNCS, vol 14144, pp. 115‑134, Springer (Aug. 2023). (Oral, Peer‑reviewed, Full paper)
-          <a href="pdf/kamada_INTERACT2023_aam.pdf" class="underline hover:text-indigo-700" download>PDF</a></li>
-        </ul>
+    <!-- Funding（Publication と Experience の間に追加） -->
+    <section id="funding" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Funding</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+          <ul class="space-y-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <span class="font-semibold">DC2, JSPS Research Fellowship （selected）</span>
+                <span class="text-zinc-500 dark:text-zinc-400">Apr. 2026 – Mar. 2028</span>
+              </div>
+              <p class="mt-2 leading-relaxed">
+                To apper
+              </p>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <span class="font-semibold">JAIST-SPRING, JST</span>
+                <span class="text-zinc-500 dark:text-zinc-400">Apr. 2024 – Mar. 2027</span>
+              </div>
+              <p class="mt-2 leading-relaxed">
+                Exploring Factors Affecting Trust in AI for AI-Based Decision Making and Proposing Trust Control Methods
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="border-t pt-6">
-        <h3 class="font-semibold mb-2">■ Domestic Paper (Japanese)</h3>
-        <ul class="list-disc list-inside space-y-1 text-sm md:text-base">
-          <li>渡会隆哉, 鎌田光太郎, 角康之, 王子洋, 高島健太郎, 由井薗隆也. (2025) “VR会議における他者との対面量に着目した会議の質の分析”, 情報処理学会論文誌コンシューマ・デバイス＆システム（CDS）, 15, 1, 1‑10.（論文誌）</li>
-          <li>鎌田光太郎, 渡会隆哉, 王子洋, 高島健太郎, 角康之, 由井薗隆也．(2023) “VRグループ・ディスカッションにおける会議形態の違いがターンテイキングに与える影響”， 第200回ヒューマンインタフェース学会研究会「コミュニケーション支援および一般」, ヒューマンインタフェース学会研究報告集, 25(3), pp.97–102, (May. 2023). (Oral, Non‑review) </li>
-          <li>渡会隆哉, 鎌田光太郎, 王子洋, 高島健太郎, 角康之, 由井薗隆也．(2023) "VR会議における他者との対面量に着目した会議の質評価の試み", DICOMO 2023 シンポジウム, (Jul. 2023). (Oral, Non‑review, 優秀論文賞, 山下記念賞)</li>
-          <li>羅海洋, 由井薗隆也, 鎌田光太郎, 王子洋．(2023) “感情変化に注目した機械学習による冒険ストーリー生成の試行”, DICOMO 2023 シンポジウム, (Jul. 2023). (Oral, Non‑review).</li>
-        </ul>
+    <!-- Experience -->
+    <section id="experience" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Experience</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+          <ul class="space-y-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">Internship (Aug. 2024 - Sep. 2024)</span> — "An investigation of group dynamics in videoconferencing"
+              (Dr. Naomi Yamashita, Ms. Masami Takahashi). Social Informatics Laboratories, NTT R&D.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">Internship (Sep. 2022 - Feb. 2023)</span> — "Psychological examination" (Prof. Mie Matsui).
+              Laboratory of Neuropsychology, Kanazawa University.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">Internship (Jul. 2022 - Aug. 2022)</span> — "AR remote collaborative work system using Unity and sensors"
+              (Dr. Mai Otsuki). AIST.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">LA (Sep. 2023 - Dec. 2023)</span> — ボトムアップ思考とトップダウン思考を区別した創造性支援ツールの基礎研究 (Prof. Takaya Yuizono).
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">LA (Sep. 2023 - Dec. 2023)</span> — ボトムアップ思考を用いた創造技法の基礎研究 (Prof. Takaya Yuizono).
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">TA (2025)</span> — 異分野「超」体験実践Ⅰa, JAIST.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">TA (2023)</span> — Introduction to Systems Development for Knowledge Science Experiment / Survey (JavaScript/HTML/CSS), JAIST.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">TA (2023, 2024, 2025)</span> — Introduction to Knowledge Creation, JAIST.
+            </li>
+            <li class="rounded-xl bg-zinc-50/70 p-4 dark:bg-zinc-900/40">
+              <span class="font-semibold">RA (2024-2025)</span> — 共創的実践で社会を変革する博士人材育成プログラム… , JAIST.
+            </li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="border-t pt-6">
-        <h3 class="font-semibold mb-2">■ Poster/Demo</h3>
-        <ul class="list-disc list-inside space-y-1 text-sm md:text-base">
-          <li>由井薗隆也, 鎌田光太郎,東方沙由理,元山琴菜,島田淳一,白肌邦生,小泉周,永井 由佳里. (2025) 21 世紀型トランスファラブルスキルを持つ創造的問題解決人材の存在次元についての考察. 第47回日本創造学会研究大会 (2025). (Non‑review) </li>
-          <li>劉 牧辰，松井三枝，堂本千晶，由井薗隆也，鎌田光太郎．(2025) “メタバース・スーパーマーケット場面を利用した日常生活認知機能の測定法“, 認知神経科学会第30回学術集会. (Non‑review) </li>
-          <li>鎌田光太郎, 篠田怜, 松井三枝, 由井薗隆也. (2025) “VRを利用した社会認知機能の測定手法の試作”, インタラクション2025．</li>
-          <li>劉 牧辰，松井三枝，堂本千晶，滝口雄太，由井薗隆也，鎌田光太郎．(2024) “メタバースによるショッピング課題の作成と実用可能性の検討“, 第8回（2024年度第1回）「生涯学」領域会議, (Aug. 2024). (Non‑review) </li>
-          <li>渡会隆哉, 鎌田光太郎, 角康之, 王子洋, 由井薗隆也, 高島健太郎．(2024) “VR会議における他者との対面量と言語行動の対応関係の分析“, インタラクション2024 第28回 一般社団法人情報処理学会シンポジウム, (Mar. 2024). (Non‑review)</li>
-        </ul>
+    <!-- Contribution -->
+    <section id="contribution" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Contribution</h2>
+          <div class="hidden sm:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+
+        <div class="mt-8 rounded-2xl border border-zinc-200/70 bg-white/70 p-6 shadow-sm dark:border-zinc-800/70 dark:bg-zinc-950/30">
+          <ul class="list-disc pl-5 space-y-2 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+            <li>
+              <a href="https://sites.google.com/kjs.nagaokaut.ac.jp/kicss2025/organization"
+                 class="font-semibold text-indigo-700 hover:underline dark:text-indigo-300">
+                KICSS 2025 Invited Session Co-Chairs
+              </a>
+            </li>
+            <li>
+              <a href="http://www1.tcue.ac.jp/home1/k-gakkai/pdf/support.pdf"
+                 class="font-semibold text-indigo-700 hover:underline dark:text-indigo-300">
+                Invited Talk: "Why and how I am doing metaverse and AI research after graduating from TCUE" (Aug. 2023)
+              </a>
+            </li>
+            <li>
+              <a href="https://www.jaist.ac.jp/about/data/magazine/life-u2023.pdf"
+                 class="font-semibold text-indigo-700 hover:underline dark:text-indigo-300">
+                Interview for Admissions Brochure in JAIST (Feb. 2023)
+              </a>
+            </li>
+            <li>Administrative Assistance: 2022 Creativity Society Design Symposium (Dec. 2022).</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="max-w-4xl mx-auto px-4 py-16" aria-label="Experience">
-    <h2 class="text-3xl font-bold mb-6">Experience</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
-      <li>Internship (Aug. 2024 - Sep. 2024): "An investigation of group dynamics in videoconferencing" (Dr. Naomi Yamashita, Ms. Masami Takahashi). Social Informatics Laboratories, NTT R&D.</li>
-      <li>Internship (Sep. 2022 - Feb. 2023): "Psychological examination" (Professor. Matsui, Mie). Laboratory of Neuropsychology, Kanazawa University.</li>
-      <li>Internship (Jul. 2022 - Aug. 2022): "Technical development and operation test of AR remote collaborative work system using Unity and various sensors" (Dr. Otsuki, Mai). Smart Work IoH Research Team, National Institute of Advanced Industrial Science and Technology (AIST).</li>
-      <li>LA (Sep. 2023 - Dec. 2023): "ボトムアップ思考とトップダウン思考を区別した創造性支援ツールの基礎研究" (Professor. Yuizono, Takaya).</li>
-      <li>LA (Sep. 2023 - Dec. 2023): "ボトムアップ思考を用いた創造技法の基礎研究" (Professor. Yuizono, Takaya).</li>
-      <li>TA (2025): 異分野「超」体験実践Ⅰa, JAIST.</li>
-      <li>TA (2023): "Introduction to Systems Development for Knowledge Science Experiment / Survey", Support teaching programing (JavaScript, HTML, CSS) / Evaluating homework, and making course archive/assignment, JAIST.</li>
-      <li>TA (2023, 2024, 2025) : "Introduction to Knowledge Creation", JAIST.</li>
-      <li> RA (2024-2025): 共創的実践で社会を変革する博士人材育成プログラム-大学院リーグのプロトタイプと実装-, JAIST.</li>
-    </ul>
-  </section>
-
-  <!-- Contribution Section -->
-  <section id="contribution" class="max-w-4xl mx-auto px-4 py-16" aria-label="Contribution">
-    <h2 class="text-3xl font-bold mb-6">Contribution</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
-        <li><a href="https://sites.google.com/kjs.nagaokaut.ac.jp/kicss2025/organization" class="underline hover:text-indigo-700">KICSS 2025 Invited Session Co-Chairs</a></li>
-      <li> <a href="http://www1.tcue.ac.jp/home1/k-gakkai/pdf/support.pdf" class="underline hover:text-indigo-700">Invited Talk: "Why and how I am doing metaverse and AI research after graduating from TCUE", in Takasaki City University of Economics, Society of Economics (Aug. 2023).</a></li>
-      <li> <a href="https://www.jaist.ac.jp/about/data/magazine/life-u2023.pdf" class="underline hover:text-indigo-700">Taking Interview for Admissions Brochure in JAIST (Feb. 2023).</a></li>
-      <li> Administrative Assistance: 2022 Creativity Society Design Symposium (Dec. 2022).</li>
-    </ul>
-  </section>
-
-  <!-- Japanese Anchor Placeholder -->
-  <section id="japanese" class="max-w-4xl mx-auto px-4 py-16" aria-label="Japanese">
-    <h2 class="text-3xl font-bold mb-6"></h2>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="text-center text-sm text-gray-500 py-8 border-t">
-    ©: 2025 Koutaro Kamada
+  <footer class="border-t border-zinc-200/70 py-8 text-center text-xs sm:text-sm text-zinc-500 dark:border-zinc-800/70 dark:text-zinc-400">
+    © 2025 Koutaro Kamada
   </footer>
 
-  <!-- Mobile menu toggle script -->
   <script>
+    // Mobile menu toggle
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+
+    function setMenu(open) {
+      menu.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+    }
+
+    btn?.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      setMenu(!isOpen);
     });
+
+    // Close menu when clicking a link
+    menu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => setMenu(false));
+    });
+
+    // Theme toggle (dark mode)
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const themeBtnMobile = document.getElementById('themeBtnMobile');
+    const icon = document.getElementById('themeIcon');
+    const iconM = document.getElementById('themeIconMobile');
+
+    function applyTheme(mode) {
+      const isDark = mode === 'dark';
+      root.classList.toggle('dark', isDark);
+      localStorage.setItem('theme', mode);
+      if (icon) icon.textContent = isDark ? '☀' : '☾';
+      if (iconM) iconM.textContent = isDark ? '☀' : '☾';
+    }
+
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') applyTheme(saved);
+
+    function toggleTheme() {
+      const isDark = root.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    }
+
+    themeBtn?.addEventListener('click', toggleTheme);
+    themeBtnMobile?.addEventListener('click', toggleTheme);
   </script>
 </body>
 </html>
